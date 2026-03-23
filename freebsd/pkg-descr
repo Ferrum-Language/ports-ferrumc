@@ -1,0 +1,12 @@
+Ferrum-language is a systems programming language with C syntax and
+compile-time memory safety via a borrow checker and ownership model.
+Compiled to native code through LLVM 18.
+
+Features:
+- Ownership and move semantics
+- Immutable and mutable borrows enforced at compile time
+- Opt-in unsafe blocks for raw pointer arithmetic and FFI
+- C interoperability via #include
+- Zero runtime overhead — no garbage collector, no reference counting
+
+WWW: https://ferrum-language.github.io/Ferrum/
