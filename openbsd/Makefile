@@ -1,21 +1,24 @@
-COMMENT=	Ferrum-language compiler with compile-time memory safety
+COMMENT =	Ferrum-language compiler with compile-time memory safety
 
-V=		0.3.0
-DISTNAME=	ferrumc-v${V}-freebsd-x86_64
-PKGNAME=	ferrumc-${V}
-CATEGORIES=	lang
+DISTNAME =	ferrumc-v0.3.0-linux-amd64
+PKGNAME =	ferrumc-0.3.0
+CATEGORIES =	lang
 
-HOMEPAGE=	https://ferrum-language.github.io/Ferrum/
-MASTER_SITES=	https://github.com/Ferrum-Language/Ferrum/releases/download/v${V}/
-DISTFILES=	ferrumc-v${V}-freebsd-x86_64.tar.gz
+HOMEPAGE =	https://ferrum-language.github.io/Ferrum/
+MAINTAINER =	Ferrum-Language <noreply@ferrum-lang.org>
 
-MAINTAINER=	noreply@ferrum-lang.org
+# GPL v3
+PERMIT_PACKAGE =	Yes
 
-PERMIT_PACKAGE=	Yes
+WANTLIB =
 
-NO_BUILD=	Yes
+MASTER_SITES =	https://github.com/Ferrum-Language/Ferrum/releases/download/v0.3.0/
+DISTFILES =	ferrumc-v0.3.0-linux-x86_64.tar.gz
+
+NO_BUILD =	Yes
+NO_TEST =	Yes
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/ferrumc ${PREFIX}/bin/ferrumc
+	${INSTALL_PROGRAM} ${WRKDIR}/ferrumc ${PREFIX}/bin/ferrumc
 
 .include <bsd.port.mk>

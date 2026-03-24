@@ -1,0 +1,52 @@
+#!/bin/bash
+# Slackware build script for ferrumc
+# Written by Ferrum-Language <noreply@ferrum-lang.org>
+
+PRGNAM=ferrumc
+VERSION=${VERSION:-0.3.0}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+PKGTYPE=${PKGTYPE:-tgz}
+
+ARCH=$(uname -m)
+case "$ARCH" in
+  x86_64) ARCH=x86_64 ;;
+  aarch64) ARCH=aarch64 ;;
+  *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
+esac
+
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+set -e
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+
+DOWNLOAD_x86_64="https://github.com/Ferrum-Language/Ferrum/releases/download/v${VERSION}/ferrumc-v${VERSION}-linux-x86_64.tar.gz"
+DOWNLOAD_aarch64="https://github.com/Ferrum-Language/Ferrum/releases/download/v${VERSION}/ferrumc-v${VERSION}-linux-aarch64.tar.gz"
+
+eval DOWNLOAD=\$DOWNLOAD_$ARCH
+
+cd $TMP
+wget -c "$DOWNLOAD" -O ferrumc-${VERSION}-linux-${ARCH}.tar.gz
+tar xzf ferrumc-${VERSION}-linux-${ARCH}.tar.gz
+
+install -Dm755 ferrumc $PKG/usr/bin/ferrumc
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat > $PKG/install/slack-desc << SLKDESC
+ferrumc: ferrumc (Ferrum-language compiler)
+ferrumc:
+ferrumc: Ferrum-language is a systems programming language with C syntax
+ferrumc: and compile-time memory safety via a borrow checker and ownership
+ferrumc: model, compiled to native code through LLVM 18.
+ferrumc:
+ferrumc: Homepage: https://ferrum-language.github.io/Ferrum/
+ferrumc:
+SLKDESC
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

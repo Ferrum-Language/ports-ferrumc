@@ -1,0 +1,18 @@
+To: ports@openbsd.org
+Subject: [NEW PORT] lang/ferrumc - Ferrum-language compiler 0.3.0
+
+Hello,
+
+I'd like to submit a new port for the Ferrum-language compiler.
+
+Ferrum-language is a systems programming language with C syntax and
+compile-time memory safety via a borrow checker and ownership model,
+compiled to native code through LLVM 18.
+
+- Homepage: https://ferrum-language.github.io/Ferrum/
+- License: GPL-3.0
+- Version: 0.3.0
+
+The port Makefile is attached. Please let me know if any changes are needed.
+
+Thank you.
